@@ -15,14 +15,14 @@ def get_app_details(app_url):
         
         response = requests.get(app_url, headers=headers, timeout=10)
         
-        # 关键修正 1: 强制指定UTF-8编码，解决所有乱码问题
+        #强制指定UTF-8编码，解决所有乱码问题
         response.encoding = 'utf-8'
         
         response.raise_for_status()
 
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        # 关键修正 2: 使用更精确的CSS选择器
+        # 使用更精确的CSS选择器
         
         # App 名称
         name_tag = soup.select_one('h1.product-header__title')

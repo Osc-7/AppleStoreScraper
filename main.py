@@ -1,13 +1,11 @@
 # 导入os模块，用来处理环境变量
 import os
 
-# --- 关键修正：在所有代码运行前，清除代理设置 ---
-# 这几行代码会告诉本次运行的程序，忽略系统中的所有代理设置
+# 忽略系统中的所有代理设置
 os.environ['HTTP_PROXY'] = ''
 os.environ['HTTPS_PROXY'] = ''
 os.environ['http_proxy'] = ''
 os.environ['https_proxy'] = ''
-# --- 修正结束 ---
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -23,7 +21,6 @@ def run(category_name, category_id):
     
     driver = None # 先声明driver变量
     try:
-        # 这里的代码和之前一样
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
         
         urls = get_top_app_urls(driver, category_name, category_id, max_apps=MAX_APPS_PER_CATEGORY)
